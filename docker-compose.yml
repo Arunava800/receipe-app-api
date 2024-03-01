@@ -1,0 +1,35 @@
+#This is the version of the docker compose syntax, that we are going to use.
+version: "3.9"
+
+
+#The next lines defines the services. This is the main block inside the docker compose file.
+#It typically consists of one or more services, as needed by the applications. On the services
+#we have:
+#  1. app: this is the name of our service. this is the service which is going to run our
+#  docker files.
+#  2. build: context which is set as .(dot). the dot represents the current directory. This
+#  specifies we want to-built the docker file inside the current directory. Therefore, the
+#  context that we are going to use is the root directory that we are running in the command
+#  prompt.
+#  3. ports: It represents the port mappings. It maps port 8000 inside our local machine. This
+#  is the port 8000 inside our docker container. This is how we can connect to the network
+#  when we want to connect to the server.
+#  4. Volumes: These are the way of mapping the directories from our system into the docker
+#  container.Therefore, we are mapping the app directory, that we are creating inside the
+#  project to /app inside our container.It is done so that the changes are reflected in
+#  real time, and therefore we don't have to rebuild the container every time
+#  5. Command: This is the command which is used to run the service. We can override the
+#  mentioned command when we run docker compose run. However, we don't specify any command
+#  it is going to return the command that is specified.
+services:
+  app:
+    build:
+      context: .
+      args:
+        - DEV=true
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./app:/app
+    command: >
+      sh -c "python manage.py runserver 0.0.0.0:8000"

@@ -1,0 +1,17 @@
+The docker context is the directory from where the docker is running.
+#Git
+.git
+.gitignore
+
+
+# Docker
+.docker
+
+#Python
+.app/__pycache__/
+app/*/__pycache__/
+app/*/*/pycache__/
+app/*/*/*/__pycache__/
+.env/
+.venv/
+venv/
